@@ -17,7 +17,7 @@ The scripts in this repository are designed to be run in a specific order to gen
 
 This script generates text from a specified model based on questions from the GSM8k dataset.
 
-    python src/generate_gsm_examples.py --model <model_name> --num_examples <number_of_examples> --results_dir <directory_to_save_results> --results_save_name <name_of_results_file>
+    python generate_gsm_examples.py --model <model_name> --num_examples <number_of_examples> --results_dir <directory_to_save_results> --results_save_name <name_of_results_file>
 
 **Arguments**:
 * `--model`: The shorthand name of the model to use.
@@ -29,7 +29,7 @@ This script generates text from a specified model based on questions from the GS
 
 This script takes the generated text and uses the OpenAI API to create causal graphs.
 
-    python src/api_causal_graphs.py --data_path <path_to_generated_data> --model_short_name <model_shorthand> --indices_range <range> --output_path <path_to_save_output> --api_model <api_model_name>
+    python api_causal_graphs.py --data_path <path_to_generated_data> --model_short_name <model_shorthand> --indices_range <range> --output_path <path_to_save_output> --api_model <api_model_name>
 
 **Arguments**:
 * `--data_path`: The path to the file containing the generated text from the previous step.
@@ -42,7 +42,7 @@ This script takes the generated text and uses the OpenAI API to create causal gr
 
 This script cleans the generated causal graphs by removing invalid or unsupported entries.
 
-    python src/cleanup_api_causal_graphs.py --data_path <path_to_causal_graphs> --save_path <path_to_save_cleaned_data> --model_short_name <model_shorthand>
+    python cleanup_api_causal_graphs.py --data_path <path_to_causal_graphs> --save_path <path_to_save_cleaned_data> --model_short_name <model_shorthand>
 
 **Arguments**:
 * `--data_path`: The path to the file containing the causal graphs from the previous step.
@@ -53,7 +53,7 @@ This script cleans the generated causal graphs by removing invalid or unsupporte
 
 This is the main experimental script. It loads a model and the cleaned causal graphs, then performs interventions and records the results.
 
-    python src/general_intervention_test.py --model <model_shorthand> --data_path <path_to_cleaned_data> --num_interventions <number_of_interventions> --results_save_name <name_for_results_file>
+    python general_intervention_test.py --model <model_shorthand> --data_path <path_to_cleaned_data> --num_interventions <number_of_interventions> --results_save_name <name_for_results_file>
 
 **Arguments**:
 * `--model`: The shorthand name of the model to test.
